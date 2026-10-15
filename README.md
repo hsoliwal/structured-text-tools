@@ -3,6 +3,109 @@
 The following is a list of text-based file formats and command-line tools for manipulating each.
 
 
+<!-- fork-homepage-guide:begin -->
+## Start here: choose a tool by the shape of your data
+
+This is a catalogue, not a single parser, executable or installable toolkit. It
+helps you choose among tools for filtering, querying, converting and exploring
+structured text. This [hsoliwal fork](https://github.com/hsoliwal/structured-text-tools)
+inherits [dbohdan/structured-text-tools](https://github.com/dbohdan/structured-text-tools).
+At reviewed default
+[`8a27105`](https://github.com/hsoliwal/structured-text-tools/commit/8a271051af5a072f416f3a8a068495de4380a815),
+the tree matched upstream. Fork proposals are separately reviewable changes,
+not evidence that every listed tool is tested here or that an optimization is deployed.
+
+### A quick decision guide
+
+| Your input or task | Start here | Watch for |
+| --- | --- | --- |
+| Simple whitespace-delimited records | [awk](#awk), [POSIX commands](#posix-commands) | These tools do not inherently understand quoted CSV |
+| CSV or TSV with quoting | [CSV tools](#csv) | Embedded delimiters, newlines, escaping and headers |
+| Nested objects or arrays | [JSON tools](#json) | JSON structure is not a reliable regular-expression target |
+| SQL-style grouping or joins over files | [SQL-based comparison](sql-based.md) | Different tools support different formats and SQL dialects |
+| Structured config conversion | [Configuration files](#configuration-files), [multiformat tools](#multiformat-tools) | Types, comments and ordering may not survive round trips |
+| An unfamiliar dataset | [Interactive TUIs](#extra-interactive-tuis) | Inspect a copy before writing transformations |
+
+### Vocabulary you will see throughout the list
+
+- **Record / field:** one item and a component of that item; boundaries depend on the format.
+- **CSV / TSV:** delimited tables; proper quoting can make a record span physical lines.
+- **JSON Lines:** one JSON value per line, unlike a single JSON array containing all records.
+- **Query / projection:** selecting matching records or selected fields without necessarily changing the source.
+- **Streaming:** processing incrementally; sorting, joins and aggregation may still need retained state.
+- **TUI:** an interactive text user interface in a terminal.
+
+### Try two small, local examples
+
+For simple whitespace-separated records, POSIX awk can filter and project:
+
+```sh
+printf 'Ada 9\nLin 12\n' | awk '$2 >= 10 { print $1 }'
+```
+
+Expected output is `Lin`. This is appropriate because the example has no quoted
+fields or embedded spaces. Do not change the separator to a comma and assume it
+has become a general CSV parser.
+
+For quoted CSV, Python 3's standard library gives a self-contained contrast:
+
+```sh
+python3 - <<'PY'
+import csv
+import io
+
+sample = 'name,score\n"Ada, Jr.",9\nLin,12\n'
+rows = list(csv.DictReader(io.StringIO(sample)))
+print(rows[0]["name"])
+print([row["name"] for row in rows if int(row["score"]) >= 10])
+PY
+```
+
+Expected output is `Ada, Jr.` followed by `['Lin']`. The comma inside quotes stays
+inside one field. Now use the catalogue to find a CLI with the same format
+semantics and the operations you need. Examples show small input contracts;
+they are not performance comparisons or endorsements of every listed tool.
+
+### Catalogue maintenance quickstart
+
+The homepage is generated. [CONTRIBUTING.md](CONTRIBUTING.md) identifies the
+correct edit locations: project entries live in [data/projects.toml](data/projects.toml),
+while prose such as this guide lives in [README.md.jinja](README.md.jinja).
+The SQL comparison has its own [data file](data/sql-based.toml) and template.
+
+With Git, Make, Python 3.8+ and `uv` available, from the checkout root:
+
+```sh
+git clone https://github.com/hsoliwal/structured-text-tools.git
+cd structured-text-tools
+git rev-parse HEAD
+make -B README.md
+git diff --check
+git diff -- README.md README.md.jinja data/projects.toml
+```
+
+The [renderer](render-template.py) declares Click 8, Jinja2 3 and Tomli 2 inline;
+`uv` resolves those dependencies, so first use needs network access. `make -B`
+regenerates the homepage even when timestamps say it is current. Preserve a clean
+checkpoint before regenerating and inspect the diff; don't hand-edit generated
+output as the only durable change.
+
+### Compact cheat sheet
+
+| Need | Action |
+| --- | --- |
+| Find a tool for a format | Jump to the format in the contents below |
+| Add or correct a catalogue entry | Edit `data/projects.toml`, then regenerate |
+| Improve homepage explanations | Edit `README.md.jinja`, then regenerate |
+| Rebuild both generated pages | `make -B` |
+| Compare SQL-on-file tools | Read [sql-based.md](sql-based.md) |
+| Check redistribution requirements | Read the [CC BY 4.0 license](#license) and [curator disclosure](#disclosure) |
+
+Verify the selected tool's own documentation, release and license before adoption.
+The upstream catalogue and its attribution/disclosure remain below unchanged.
+
+<!-- fork-homepage-guide:end -->
+
 ## Contents
 
 - [awk-like](#awk-like)
