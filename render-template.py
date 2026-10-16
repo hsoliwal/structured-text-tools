@@ -33,15 +33,31 @@ class Project:
         return cls(name=name, **d)
 
 
+def group_projects_by_tag(projects: list[Project]) -> dict[str, tuple[Project, ...]]:
+    """Precompute an immutable tag -> source-order project index, once per render.
+
+    A project with a duplicate tag appears only once, matching the old
+    `tag in project.tags` predicate. The result never retains rendered text.
+    """
+    groups: dict[str, list[Project]] = {}
+    for project in projects:
+        for tag in dict.fromkeys(project.tags):
+            groups.setdefault(tag, []).append(project)
+    return {tag: tuple(members) for tag, members in groups.items()}
+
+
 @click.command()
 @click.argument("template-name", type=click.Path(exists=True, path_type=Path))
 @click.argument("data-path", type=click.Path(exists=True, path_type=Path))
 def main(template_name: Path, data_path: Path) -> None:
     data = tomli.loads(data_path.read_text())
     projects = list(starmap(Project.from_dict, data.items()))
+    by_tag = group_projects_by_tag(projects)
 
     def projs_with_tag(tag: str) -> list[Project]:
-        return [proj for proj in projects if tag in proj.tags]
+        # Keep the old fresh-list contract for consumers that mutate results.
+        # Search cost now scales with the selected category, not all projects.
+        return list(by_tag.get(tag, ()))
 
     env = j2.Environment(
         loader=j2.FileSystemLoader("."),
