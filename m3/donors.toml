@@ -1,0 +1,77 @@
+# M3 candidate annotations are editorial classifications of the descriptions in
+# data/projects.toml, not claims of license compatibility or implementation speed.
+# Update review status only with source evidence; Java/JNI promotion also needs
+# an OpenRewrite recipe and differential test evidence in the convergence repo.
+schema_version = 1
+
+[donors.csvfix]
+problem_categories = ["delimited-records", "format-conversion"]
+operations = ["filter", "normalize", "split", "validate", "convert"]
+review_status = "candidate"
+license_status = "unverified"
+benchmark_status = "not-run"
+implementation_status = "not-evaluated"
+
+[donors.csvkit]
+problem_categories = ["delimited-records", "structured-search"]
+operations = ["filter", "join", "sort", "query"]
+review_status = "candidate"
+license_status = "unverified"
+benchmark_status = "not-run"
+implementation_status = "not-evaluated"
+
+[donors.csvtk]
+problem_categories = ["delimited-records", "structured-search"]
+operations = ["search", "sample", "join", "sort"]
+review_status = "candidate"
+license_status = "unverified"
+benchmark_status = "not-run"
+implementation_status = "not-evaluated"
+
+[donors.dasel]
+problem_categories = ["structured-query", "format-conversion"]
+operations = ["query", "update"]
+review_status = "candidate"
+license_status = "unverified"
+benchmark_status = "not-run"
+implementation_status = "not-evaluated"
+
+[donors.gron]
+problem_categories = ["json-path-indexing", "format-conversion"]
+operations = ["flatten", "convert"]
+review_status = "candidate"
+license_status = "unverified"
+benchmark_status = "not-run"
+implementation_status = "not-evaluated"
+
+[donors.jq]
+problem_categories = ["structured-query", "format-conversion"]
+operations = ["query", "transform", "convert"]
+review_status = "candidate"
+license_status = "unverified"
+benchmark_status = "not-run"
+implementation_status = "not-evaluated"
+
+[donors.Miller]
+problem_categories = ["delimited-records", "structured-search"]
+operations = ["filter", "join", "sort"]
+review_status = "candidate"
+license_status = "unverified"
+benchmark_status = "not-run"
+implementation_status = "not-evaluated"
+
+[donors.VisiData]
+problem_categories = ["interactive-exploration"]
+operations = ["explore"]
+review_status = "candidate"
+license_status = "unverified"
+benchmark_status = "not-run"
+implementation_status = "not-evaluated"
+
+[donors.xsv]
+problem_categories = ["delimited-records", "structured-search"]
+operations = ["index", "slice", "join", "analyze"]
+review_status = "candidate"
+license_status = "unverified"
+benchmark_status = "not-run"
+implementation_status = "not-evaluated"
