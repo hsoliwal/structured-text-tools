@@ -11,6 +11,8 @@ on:
       - 'README.md.jinja'
       - 'sql-based.md.jinja'
       - 'macros.md.jinja'
+      - 'm3/**'
+      - 'tests/test_m3_catalogue.py'
   workflow_dispatch:
 
 permissions:
