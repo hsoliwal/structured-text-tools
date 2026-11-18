@@ -80,6 +80,10 @@ For source changes, inherit the [canonical Synexia universal atom/pattern invari
 
 **Enrollment status:** this is governance-only. It does not claim a full Git/PR history audit, source atomization, semantic equivalence, regenerated catalogue, CI or runtime validation.
 
+### Registered algorithms, patterns and machine-tagged unknowns
+
+For every proposed change, consult the authorized, versioned algorithm/operator/pattern catalogue first. A known pattern or algorithm requires a stable ID, applicability rules, roles, contracts, effects and an evidence-scoped status. A structural resemblance, LogicHash/SimHash candidate or LLM suggestion is not an admitted known pattern. Preserve unknowns as `UNKNOWN_ALGORITHM`, `UNKNOWN_PATTERN` or `UNPROVEN_MATCH` in the existing machine-readable source inventory, with source pin, owner, atom ID, dependencies, rationale, proof state and review owner. Link those records from accurate documentation or existing supported annotations; never invent noncompiling annotations or arbitrarily rewrite the source. Repeated unknowns become pattern proposals only after an independent recognizer, validator, template, provenance review and qualification. No unknown tag authorizes code replacement, license change or merge. Canonical proposed extension: [Synexia MOP SDK lattice PR #18784](https://github.com/hsoliwal/com.synexia/pull/18784).
+
 ## Admission order
 
 Inventory -> full available history/PR audit -> compatible superset design
