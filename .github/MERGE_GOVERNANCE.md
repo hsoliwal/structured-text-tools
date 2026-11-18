@@ -68,6 +68,22 @@ derive an original implementation from lawfully obtained functional
 specifications, independently designed algorithms and independent tests,
 then verify provenance before admitting it.
 
+## MOP SDK: source-bound atoms and bidirectional pattern composition
+
+For source changes, inherit the [canonical Synexia universal atom/pattern invariant](https://github.com/hsoliwal/com.synexia/blob/develop/docs/M3-SCALE/invariants/SYNEXIA-UNIVERSAL-API-ATOM-PATTERN-EVOLUTION-1.md) and [historical additive superset law](https://github.com/hsoliwal/com.synexia/blob/develop/docs/M3-SCALE/invariants/SYNEXIA-ADDITIVE-MERGE-FULL-HISTORY-20261118.md). The canonical repository owns reusable Maven/OpenRewrite recipes, proof ledgers and correction history; this catalogue fork does not acquire those private engines.
+
+**Downward:** repository -> project -> module -> package/namespace -> file -> types/interfaces, fields, methods, exports, comments and meaningful semantic atoms. Preserve its actual format and language semantics; this repository is primarily a data-driven documentation catalogue, not a Java-only product. Source, build templates, generated Markdown and upstream content have distinct owners and licenses.
+
+**Upward:** verified atoms -> file composition -> package/interface contracts -> modules -> project -> repository/SDK. Record contracts, effects, pattern roles, caller dependencies, source-hash and normalization-version identities, NO_SAFE_EXTRACTION/UNRESOLVED decisions, and explicit proof obligations. Recompute only the affected dependency closure; never force tiny helpers or change supported APIs by style.
+
+**Evidence:** independent files may be inventoried and prepared in bounded parallel, but each mutable file has one writer; verified promotion is deterministic and serial. LogicHash, StructuralHash, SimHash and labels identify comparison candidates only. Maintain source-bound documentation as persistent machine memory; independently validate a best-qualified implementation under measured constraints, not an asserted universal optimum. Preserve any generated-page/template workflow and exact upstream attribution. Do not replace accepted code or rewrite upstream licensing via LLM paraphrase. Missing compiler, tests, full history, format/renderer verification or provenance remains NOT_RUN/HOLD.
+
+**Enrollment status:** this is governance-only. It does not claim a full Git/PR history audit, source atomization, semantic equivalence, regenerated catalogue, CI or runtime validation.
+
+### Registered algorithms, patterns and machine-tagged unknowns
+
+For every proposed change, consult the authorized, versioned algorithm/operator/pattern catalogue first. A known pattern or algorithm requires a stable ID, applicability rules, roles, contracts, effects and an evidence-scoped status. A structural resemblance, LogicHash/SimHash candidate or LLM suggestion is not an admitted known pattern. Preserve unknowns as `UNKNOWN_ALGORITHM`, `UNKNOWN_PATTERN` or `UNPROVEN_MATCH` in the existing machine-readable source inventory, with source pin, owner, atom ID, dependencies, rationale, proof state and review owner. Link those records from accurate documentation or existing supported annotations; never invent noncompiling annotations or arbitrarily rewrite the source. Repeated unknowns become pattern proposals only after an independent recognizer, validator, template, provenance review and qualification. No unknown tag authorizes code replacement, license change or merge. Canonical proposed extension: [Synexia MOP SDK lattice PR #18784](https://github.com/hsoliwal/com.synexia/pull/18784).
+
 ## Admission order
 
 Inventory -> full available history/PR audit -> compatible superset design
